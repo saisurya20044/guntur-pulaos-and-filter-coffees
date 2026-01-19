@@ -8,6 +8,11 @@
 body {
     background: linear-gradient(135deg, #fff1eb, #ace0f9);
     text-align: center;
+    transition: background 0.5s;
+}
+
+body.night {
+    background: linear-gradient(135deg, #2d3436, #000);
 }
 
 /* HEADER */
@@ -15,16 +20,11 @@ body {
     background: linear-gradient(90deg, #b33939, #ff6f61);
     color: white;
     padding: 25px 10px;
-    animation: slideDown 1s ease;
 }
 
 .title {
     font-size: 1.8rem;
     animation: glow 2s infinite alternate;
-}
-
-.subtitle {
-    margin-top: 6px;
 }
 
 /* GAME */
@@ -38,16 +38,26 @@ canvas {
     box-shadow: 0 8px 20px rgba(0,0,0,0.25);
 }
 
+body.night canvas {
+    background: linear-gradient(#2c3e50, #000);
+}
+
 /* HUD */
 .hud {
     display: flex;
     justify-content: space-around;
-    margin-top: 10px;
+    margin-top: 8px;
     font-size: 1.1rem;
 }
 
+/* CONTROLS */
+.controls {
+    margin-top: 8px;
+}
+
 button {
-    padding: 8px 20px;
+    margin: 4px;
+    padding: 8px 18px;
     border: none;
     border-radius: 20px;
     background: #b33939;
@@ -63,16 +73,10 @@ button:hover {
 .hint {
     font-size: 0.9rem;
     margin-top: 6px;
-    color: #2d3436;
 }
 
 /* ANIMATIONS */
 @keyframes glow {
     from { text-shadow: 0 0 5px #fff; }
     to { text-shadow: 0 0 20px #ffeaa7, 0 0 30px #ff7675; }
-}
-
-@keyframes slideDown {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
 }
