@@ -1,54 +1,81 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #fff4e6;
-    text-align: center;
+* {
     margin: 0;
-    padding: 20px;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", sans-serif;
 }
 
-h1 {
-    color: #b33939;
+body {
+    background: linear-gradient(135deg, #fff1eb, #ace0f9);
+    text-align: center;
 }
 
-.game {
-    display: grid;
-    grid-template-columns: repeat(3, 100px);
-    gap: 10px;
-    justify-content: center;
-    margin-top: 20px;
-}
-
-.box {
-    width: 100px;
-    height: 100px;
-    font-size: 40px;
-    background-color: #ffeaa7;
-    border: 2px solid #e17055;
-    cursor: pointer;
-    border-radius: 10px;
-}
-
-.box:hover {
-    background-color: #fab1a0;
-}
-
-#status {
-    margin-top: 20px;
-    font-size: 20px;
-    color: #2d3436;
-}
-
-.restart {
-    margin-top: 20px;
-    padding: 10px 25px;
-    font-size: 16px;
-    background-color: #b33939;
+/* HEADER */
+.hero {
+    padding: 25px 10px;
+    background: linear-gradient(90deg, #b33939, #ff6f61);
     color: white;
+    animation: slideDown 1.2s ease;
+}
+
+.restaurant-name {
+    font-size: 1.8rem;
+    animation: glow 2s infinite alternate;
+}
+
+.tagline {
+    margin-top: 6px;
+}
+
+/* GAME */
+.game-container {
+    margin-top: 15px;
+}
+
+canvas {
+    background: linear-gradient(#dff9fb, #c7ecee);
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+}
+
+/* HUD */
+.hud {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+    font-size: 1.1rem;
+}
+
+/* BUTTON */
+.restart {
+    margin-top: 12px;
+    padding: 10px 25px;
     border: none;
-    border-radius: 5px;
+    border-radius: 25px;
+    background: #b33939;
+    color: white;
+    font-size: 1rem;
     cursor: pointer;
+    transition: transform 0.2s;
 }
 
 .restart:hover {
-    background-color: #8e2e2e;
+    transform: scale(1.05);
+}
+
+.hint {
+    margin-top: 8px;
+    font-size: 0.9rem;
+    color: #2d3436;
+}
+
+/* ANIMATIONS */
+@keyframes glow {
+    from { text-shadow: 0 0 5px #fff; }
+    to { text-shadow: 0 0 20px #ffeaa7, 0 0 30px #ff7675; }
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
