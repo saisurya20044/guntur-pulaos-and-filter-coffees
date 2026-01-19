@@ -2,27 +2,26 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Biryani Run | Guntur Pulaos & Filter Coffees</title>
+    <title>Catch the Biryani | Guntur Pulaos & Filter Coffees</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <header class="hero">
-    <h1 class="restaurant-name">🍗 Guntur Pulaos & Filter Coffees ☕</h1>
-    <p class="tagline">Run • Jump • Collect Biryani 😋</p>
+    <h1 class="title">🍗 Guntur Pulaos & Filter Coffees ☕</h1>
+    <p class="subtitle">Catch the Biryani while you wait 😋</p>
 </header>
 
 <div class="game-container">
-    <canvas id="gameCanvas" width="360" height="400"></canvas>
+    <canvas id="gameCanvas" width="360" height="450"></canvas>
 
     <div class="hud">
         <span id="score">Score: 0</span>
-        <span id="highScore">High: 0</span>
+        <button onclick="restartGame()">Restart</button>
     </div>
 
-    <button class="restart" onclick="restartGame()">Restart</button>
-    <p class="hint">👉 Tap / Space to Jump</p>
+    <p class="hint">👆 Tap / Drag to move plate</p>
 </div>
 
 <script src="script.js"></script>
