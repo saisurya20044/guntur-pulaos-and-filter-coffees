@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Catch the Biryani | Guntur Pulaos & Filter Coffees</title>
+    <title>Catch the Biryani | Pro</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -10,7 +10,7 @@
 
 <header class="hero">
     <h1 class="title">🍗 Guntur Pulaos & Filter Coffees ☕</h1>
-    <p class="subtitle">Catch the Biryani while you wait 😋</p>
+    <p class="subtitle">Catch • Score • Enjoy while waiting 😋</p>
 </header>
 
 <div class="game-container">
@@ -18,10 +18,15 @@
 
     <div class="hud">
         <span id="score">Score: 0</span>
-        <button onclick="restartGame()">Restart</button>
+        <span id="high">High: 0</span>
     </div>
 
-    <p class="hint">👆 Tap / Drag to move plate</p>
+    <div class="controls">
+        <button onclick="restartGame()">Restart</button>
+        <button onclick="toggleNight()">🌙 Night</button>
+    </div>
+
+    <p class="hint">👆 Drag plate • Catch fast for combo!</p>
 </div>
 
 <script src="script.js"></script>
