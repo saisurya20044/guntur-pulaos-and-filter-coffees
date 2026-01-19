@@ -1,69 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guntur Pulaos & Filter Coffees</title>
-    <link rel="stylesheet" href="guntur.css">
+    <title>Biryani Waiting Game</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-    <header>
-        <h1>🍛 Guntur Pulaos & Filter Coffees</h1>
-        <p>Authentic Taste of Andhra</p>
-    </header>
+<h1>🍗 Biryani Waiting Game 🍚</h1>
+<p>Play with family while your biryani is getting ready 😋</p>
 
-    <nav>
-        <a href="#home">Home</a>
-        <a href="#menu">Menu</a>
-        <a href="#gallery">Gallery</a>
-        <a href="#contact">Contact</a>
-    </nav>
+<div class="game">
+    <button class="box" onclick="play(this,0)"></button>
+    <button class="box" onclick="play(this,1)"></button>
+    <button class="box" onclick="play(this,2)"></button>
 
-    <section id="home" class="hero">
-        <h2>Best Pulaos & Filter Coffee in Town</h2>
-        <p>Fresh • Hygienic • Delicious</p>
-    </section>
+    <button class="box" onclick="play(this,3)"></button>
+    <button class="box" onclick="play(this,4)"></button>
+    <button class="box" onclick="play(this,5)"></button>
 
-    <section id="menu">
-        <h2>Our Menu</h2>
-        <div class="menu">
-            <div class="item">Chicken Pulao – ₹120</div>
-            <div class="item">Veg Pulao – ₹90</div>
-            <div class="item">Special Guntur Pulao – ₹150</div>
-            <div class="item">Filter Coffee – ₹30</div>
-            <div class="item">Boost / Tea – ₹25</div>
-        </div>
-    </section>
+    <button class="box" onclick="play(this,6)"></button>
+    <button class="box" onclick="play(this,7)"></button>
+    <button class="box" onclick="play(this,8)"></button>
+</div>
 
-    <section id="gallery">
-        <h2>Our Special Dishes</h2>
-        <div class="gallery">
-            <img src="chicken.jpg" alt="Chicken Pulao">
-<img src="veg.jpg" alt="Veg Pulao">
-<img src="coffee.jpg" alt="Filter Coffee">
+<div id="status">🍗 Chicken Biryani Turn</div>
 
-        </div>
-    </section>
+<button class="restart" onclick="resetGame()">Restart Game</button>
 
-    <section id="contact">
-        <h2>Contact Us</h2>
-        <p>📍 Guntur, Andhra Pradesh</p>
-        <p>📞 +91 7799669798</p>
-        <p>⏰ Open: 7 AM – 10 PM</p>
-
-        <a href="https://wa.me/917799669798?text=Hello%20I%20want%20to%20order%20from%20Guntur%20Pulaos" class="whatsapp-btn" target="_blank">
-       📲 Order on WhatsApp
-    </a>
-    </section>
-
-    <footer>
-        <p>© 2025 Guntur Pulaos & Filter Coffees</p>
-    </footer>
-
+<script src="script.js"></script>
 </body>
-
 </html>
-
