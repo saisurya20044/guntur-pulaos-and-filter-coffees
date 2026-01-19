@@ -12,24 +12,24 @@ body {
 
 /* HEADER */
 .hero {
-    padding: 25px 10px;
     background: linear-gradient(90deg, #b33939, #ff6f61);
     color: white;
-    animation: slideDown 1.2s ease;
+    padding: 25px 10px;
+    animation: slideDown 1s ease;
 }
 
-.restaurant-name {
+.title {
     font-size: 1.8rem;
     animation: glow 2s infinite alternate;
 }
 
-.tagline {
+.subtitle {
     margin-top: 6px;
 }
 
 /* GAME */
 .game-container {
-    margin-top: 15px;
+    margin-top: 10px;
 }
 
 canvas {
@@ -46,26 +46,23 @@ canvas {
     font-size: 1.1rem;
 }
 
-/* BUTTON */
-.restart {
-    margin-top: 12px;
-    padding: 10px 25px;
+button {
+    padding: 8px 20px;
     border: none;
-    border-radius: 25px;
+    border-radius: 20px;
     background: #b33939;
     color: white;
-    font-size: 1rem;
     cursor: pointer;
     transition: transform 0.2s;
 }
 
-.restart:hover {
+button:hover {
     transform: scale(1.05);
 }
 
 .hint {
-    margin-top: 8px;
     font-size: 0.9rem;
+    margin-top: 6px;
     color: #2d3436;
 }
 
