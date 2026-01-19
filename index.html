@@ -2,31 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Biryani Waiting Game</title>
+    <title>Biryani Run | Guntur Pulaos & Filter Coffees</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h1>🍗 Biryani Waiting Game 🍚</h1>
-<p>Play with family while your biryani is getting ready 😋</p>
+<header class="hero">
+    <h1 class="restaurant-name">🍗 Guntur Pulaos & Filter Coffees ☕</h1>
+    <p class="tagline">Run • Jump • Collect Biryani 😋</p>
+</header>
 
-<div class="game">
-    <button class="box" onclick="play(this,0)"></button>
-    <button class="box" onclick="play(this,1)"></button>
-    <button class="box" onclick="play(this,2)"></button>
+<div class="game-container">
+    <canvas id="gameCanvas" width="360" height="400"></canvas>
 
-    <button class="box" onclick="play(this,3)"></button>
-    <button class="box" onclick="play(this,4)"></button>
-    <button class="box" onclick="play(this,5)"></button>
+    <div class="hud">
+        <span id="score">Score: 0</span>
+        <span id="highScore">High: 0</span>
+    </div>
 
-    <button class="box" onclick="play(this,6)"></button>
-    <button class="box" onclick="play(this,7)"></button>
-    <button class="box" onclick="play(this,8)"></button>
+    <button class="restart" onclick="restartGame()">Restart</button>
+    <p class="hint">👉 Tap / Space to Jump</p>
 </div>
-
-<div id="status">🍗 Chicken Biryani Turn</div>
-
-<button class="restart" onclick="resetGame()">Restart Game</button>
 
 <script src="script.js"></script>
 </body>
