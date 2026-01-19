@@ -2,101 +2,77 @@ const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
 let score = 0;
-let highScore = localStorage.getItem("biryaniHigh") || 0;
-document.getElementById("highScore").innerText = "High: " + highScore;
-
-let gameSpeed = 3;
-let gravity = 0.6;
 let gameOver = false;
 
-/* PLAYER */
-const player = {
-    x: 40,
-    y: 300,
-    width: 40,
-    height: 40,
-    dy: 0,
-    jumpForce: 12,
-    grounded: true
+/* PLATE */
+const plate = {
+    x: canvas.width / 2 - 40,
+    y: canvas.height - 50,
+    width: 80,
+    height: 15
 };
 
-/* OBSTACLES */
-let obstacles = [];
+/* BIRYANI */
+let biryanis = [];
+let frame = 0;
 
-function spawnObstacle() {
-    const height = 30 + Math.random() * 20;
-    obstacles.push({
-        x: canvas.width,
-        y: canvas.height - height - 20,
-        width: 30,
-        height: height
+/* CONTROLS (TOUCH + MOUSE) */
+canvas.addEventListener("mousemove", e => {
+    const rect = canvas.getBoundingClientRect();
+    plate.x = e.clientX - rect.left - plate.width / 2;
+});
+
+canvas.addEventListener("touchmove", e => {
+    const rect = canvas.getBoundingClientRect();
+    plate.x = e.touches[0].clientX - rect.left - plate.width / 2;
+});
+
+/* SPAWN BIRYANI */
+function spawnBiryani() {
+    biryanis.push({
+        x: Math.random() * (canvas.width - 30),
+        y: -30,
+        size: 30,
+        speed: 2 + Math.random() * 2
     });
 }
 
-/* CONTROLS */
-function jump() {
-    if (player.grounded && !gameOver) {
-        player.dy = -player.jumpForce;
-        player.grounded = false;
-    }
-}
-
-document.addEventListener("keydown", e => {
-    if (e.code === "Space") jump();
-});
-canvas.addEventListener("touchstart", jump);
-
 /* GAME LOOP */
-let frame = 0;
 function update() {
     if (gameOver) return;
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    /* GROUND */
+    /* DRAW PLATE */
     ctx.fillStyle = "#636e72";
-    ctx.fillRect(0, canvas.height - 20, canvas.width, 20);
+    ctx.fillRect(plate.x, plate.y, plate.width, plate.height);
 
-    /* PLAYER */
-    player.dy += gravity;
-    player.y += player.dy;
+    /* DRAW BIRYANIS */
+    biryanis.forEach((b, index) => {
+        b.y += b.speed;
 
-    if (player.y + player.height >= canvas.height - 20) {
-        player.y = canvas.height - player.height - 20;
-        player.dy = 0;
-        player.grounded = true;
-    }
+        ctx.font = "28px Arial";
+        ctx.fillText("🍲", b.x, b.y);
 
-    ctx.fillStyle = "#e17055";
-    ctx.fillRect(player.x, player.y, player.width, player.height);
-    ctx.fillText("🍗", player.x + 5, player.y + 30);
-
-    /* OBSTACLES */
-    obstacles.forEach((obs, index) => {
-        obs.x -= gameSpeed;
-        ctx.fillStyle = "#d63031";
-        ctx.fillRect(obs.x, obs.y, obs.width, obs.height);
-
-        /* COLLISION */
+        /* CATCH */
         if (
-            player.x < obs.x + obs.width &&
-            player.x + player.width > obs.x &&
-            player.y < obs.y + obs.height &&
-            player.y + player.height > obs.y
+            b.y + b.size > plate.y &&
+            b.x > plate.x &&
+            b.x < plate.x + plate.width
         ) {
-            endGame();
-        }
-
-        if (obs.x + obs.width < 0) {
-            obstacles.splice(index, 1);
+            biryanis.splice(index, 1);
             score++;
             document.getElementById("score").innerText = "Score: " + score;
         }
+
+        /* MISS */
+        if (b.y > canvas.height) {
+            endGame();
+        }
     });
 
-    if (frame % 120 === 0) spawnObstacle();
+    if (frame % 60 === 0) spawnBiryani();
 
-    gameSpeed += 0.0005;
     frame++;
     requestAnimationFrame(update);
 }
@@ -105,27 +81,20 @@ function endGame() {
     gameOver = true;
     ctx.fillStyle = "rgba(0,0,0,0.6)";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = "#fff";
+    ctx.fillStyle = "white";
     ctx.font = "20px Arial";
-    ctx.fillText("Game Over 😢", 120, 180);
-    ctx.fillText("Biryani Missed!", 110, 210);
-
-    if (score > highScore) {
-        highScore = score;
-        localStorage.setItem("biryaniHigh", highScore);
-        document.getElementById("highScore").innerText = "High: " + highScore;
-    }
+    ctx.fillText("Game Over 😢", 120, 200);
+    ctx.fillText("Biryani Spilled!", 105, 230);
 }
 
 function restartGame() {
     score = 0;
-    obstacles = [];
-    gameSpeed = 3;
+    biryanis = [];
     frame = 0;
     gameOver = false;
     document.getElementById("score").innerText = "Score: 0";
     update();
 }
 
-/* START */
+/* START GAME */
 update();
