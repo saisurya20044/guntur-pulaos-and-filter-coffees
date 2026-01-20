@@ -4,14 +4,18 @@ const scoreText = document.getElementById("score");
 const restartBtn = document.getElementById("restart");
 
 let score = 0;
-let gameOver = false;
+let isGameOver = false;
 const WIN_SCORE = 100;
 
 /* Jump */
 function jump() {
-  if (dragon.classList.contains("jump") || gameOver) return;
-  dragon.classList.add("jump");
-  setTimeout(() => dragon.classList.remove("jump"), 500);
+  if (isGameOver) return;
+  if (!dragon.classList.contains("jump")) {
+    dragon.classList.add("jump");
+    setTimeout(() => {
+      dragon.classList.remove("jump");
+    }, 500);
+  }
 }
 
 document.addEventListener("keydown", e => {
@@ -19,33 +23,40 @@ document.addEventListener("keydown", e => {
 });
 document.addEventListener("touchstart", jump);
 
-/* Game loop */
-setInterval(() => {
-  if (gameOver) return;
+/* Main Game Loop */
+const gameInterval = setInterval(() => {
+  if (isGameOver) return;
 
   score++;
   scoreText.innerText = "Score: " + score;
 
-  // 🎉 WIN CONDITION
+  // 🏆 WIN CONDITION
   if (score >= WIN_SCORE) {
-    gameOver = true;
-    obstacle.style.animationPlayState = "paused";
-    scoreText.innerText = "🎉 YOU WIN! Enjoy your biryani 😋";
-    restartBtn.style.display = "inline-block";
+    endGame("🎉 YOU WIN! Enjoy your biryani 😋");
     return;
   }
 
   // ❌ OUT CONDITION
-  const dragonTop = dragon.getBoundingClientRect().top;
-  const obstacleLeft = obstacle.getBoundingClientRect().left;
+  const dragonRect = dragon.getBoundingClientRect();
+  const obstacleRect = obstacle.getBoundingClientRect();
 
-  if (obstacleLeft < 80 && obstacleLeft > 40 && dragonTop > 160) {
-    gameOver = true;
-    obstacle.style.animationPlayState = "paused";
-    scoreText.innerText = "❌ OUT! Try again 😢  Score: " + score;
-    restartBtn.style.display = "inline-block";
+  if (
+    obstacleRect.left < dragonRect.right - 5 &&
+    obstacleRect.right > dragonRect.left + 5 &&
+    obstacleRect.bottom > dragonRect.top + 20
+  ) {
+    endGame("❌ OUT! Try again 😢");
   }
+
 }, 100);
+
+/* End Game */
+function endGame(message) {
+  isGameOver = true;
+  obstacle.style.animationPlayState = "paused";
+  scoreText.innerText = message + " | Score: " + score;
+  restartBtn.style.display = "inline-block";
+}
 
 /* Restart */
 function restartGame() {
