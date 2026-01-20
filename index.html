@@ -2,32 +2,54 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Catch the Biryani | Ultimate</title>
+    <title>Guntur Pulaos & Filter Coffees | Ultimate Ludo</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<header class="hero">
-    <h1 class="title">🍗 Guntur Pulaos & Filter Coffees ☕</h1>
-    <p class="subtitle">Catch the Biryani • Have Fun While Waiting 😋</p>
+<header class="brand">
+    <h1 class="restaurant-name">🍗 Guntur Pulaos & Filter Coffees ☕</h1>
+    <p class="tagline">Play Ludo while your biryani is getting ready 😋</p>
 </header>
 
-<div class="game-container">
-    <canvas id="gameCanvas" width="360" height="450"></canvas>
+<!-- 🎮 GAME -->
+<div class="game-wrapper">
 
-    <div class="hud">
-        <span id="score">Score: 0</span>
-        <span id="high">High: 0</span>
+    <div class="player-info">
+        <div class="player you active" id="you">YOU 🔴</div>
+        <div class="player bot" id="bot">BOT 🔵</div>
     </div>
 
-    <div class="controls">
-        <button onclick="restartGame()">Restart</button>
-        <button onclick="toggleNight()">🌙 Night</button>
+    <div class="ludo-board">
+        <div class="token red-token" id="playerToken"></div>
+        <div class="token blue-token" id="botToken"></div>
     </div>
 
-    <p class="hint">👆 Drag plate • 🍲 catch • 💣 avoid</p>
+    <div class="dice-box">
+        <div id="dice" class="dice">🎲</div>
+        <button id="rollBtn">Roll Dice</button>
+    </div>
 </div>
+
+<!-- 🍽️ MENU + COUPON -->
+<section class="menu">
+    <h2>🍽️ Our Menu</h2>
+
+    <div class="item">🍗 Chicken Biryani – ₹180</div>
+    <div class="item">🥗 Veg Biryani – ₹140</div>
+    <div class="item">☕ Filter Coffee – ₹40</div>
+
+    <div id="couponBox" class="coupon hidden">
+        🎉 You Won a Coupon! <br>
+        <strong id="couponCode"></strong><br>
+        <small>Show this at counter / WhatsApp</small>
+    </div>
+
+    <a id="orderBtn" class="order-btn" target="_blank">
+        Order on WhatsApp
+    </a>
+</section>
 
 <script src="script.js"></script>
 </body>
