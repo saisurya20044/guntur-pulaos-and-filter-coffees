@@ -6,77 +6,172 @@
 }
 
 body {
-    background: linear-gradient(135deg, #fff1eb, #ace0f9);
+    background: linear-gradient(135deg, #fdfbfb, #ebedee);
     text-align: center;
-    transition: background 0.5s;
 }
 
-body.night {
-    background: linear-gradient(135deg, #2d3436, #000);
-}
-
-/* HEADER */
-.hero {
+/* BRAND */
+.brand {
     background: linear-gradient(90deg, #b33939, #ff6f61);
     color: white;
-    padding: 25px 10px;
+    padding: 20px 10px;
 }
 
-.title {
-    font-size: 1.8rem;
-    animation: glow 2s infinite alternate;
+.restaurant-name {
+    font-size: 2rem;
+    font-weight: bold;
+    position: relative;
+    animation: glow 2s infinite alternate, float 3s infinite;
+}
+
+.restaurant-name::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,0.6),
+        transparent
+    );
+    transform: translateX(-100%);
+    animation: shine 3s infinite;
+}
+
+.tagline {
+    font-size: 0.9rem;
 }
 
 /* GAME */
-.game-container {
-    margin-top: 10px;
+.game-wrapper {
+    max-width: 360px;
+    margin: 15px auto;
 }
 
-canvas {
-    background: linear-gradient(#dff9fb, #c7ecee);
-    border-radius: 15px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
-}
-
-body.night canvas {
-    background: linear-gradient(#2c3e50, #000);
-}
-
-/* HUD */
-.hud {
+.player-info {
     display: flex;
-    justify-content: space-around;
-    margin-top: 8px;
-    font-size: 1.1rem;
+    justify-content: space-between;
+    margin-bottom: 10px;
 }
 
-/* CONTROLS */
-.controls {
-    margin-top: 8px;
+.player {
+    padding: 6px 14px;
+    border-radius: 20px;
+    color: white;
+    font-weight: bold;
+}
+
+.you { background: #d63031; }
+.bot { background: #0984e3; }
+
+.player.active {
+    box-shadow: 0 0 15px white;
+}
+
+/* BOARD */
+.ludo-board {
+    position: relative;
+    height: 260px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    margin-bottom: 12px;
+}
+
+/* TOKENS */
+.token {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    position: absolute;
+    transition: top 0.3s ease, left 0.3s ease;
+}
+
+.red-token { background: #d63031; }
+.blue-token { background: #0984e3; }
+
+/* DICE */
+.dice-box {
+    background: white;
+    padding: 10px;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.dice {
+    font-size: 2rem;
 }
 
 button {
-    margin: 4px;
-    padding: 8px 18px;
+    margin-top: 8px;
+    padding: 6px 20px;
     border: none;
     border-radius: 20px;
     background: #b33939;
     color: white;
     cursor: pointer;
-    transition: transform 0.2s;
 }
 
-button:hover {
-    transform: scale(1.05);
+/* MENU */
+.menu {
+    margin: 20px auto;
+    padding: 15px;
+    background: white;
+    border-radius: 20px;
+    max-width: 360px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
 }
 
-.hint {
-    font-size: 0.9rem;
-    margin-top: 6px;
+.menu h2 {
+    color: #b33939;
+    margin-bottom: 10px;
+}
+
+.item {
+    padding: 8px;
+    border-bottom: 1px solid #eee;
+}
+
+.coupon {
+    margin-top: 12px;
+    padding: 12px;
+    background: linear-gradient(135deg, #ffeaa7, #fab1a0);
+    border-radius: 15px;
+    animation: pop 0.6s ease, glowPulse 1.5s infinite;
+}
+
+.hidden {
+    display: none;
+}
+
+.order-btn {
+    display: block;
+    margin-top: 12px;
+    padding: 10px;
+    background: #25D366;
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: bold;
 }
 
 /* ANIMATIONS */
 @keyframes glow {
     from { text-shadow: 0 0 5px #fff; }
-    to { text-shadow: 0 0 20px #ffeaa7, 0 0 30px #ff7675; }
+    to { text-shadow: 0 0 20px #ffeaa7; }
 }
+@keyframes shine {
+    to { transform: translateX(100%); }
+}
+@keyframes float {
+    50% { transform: translateY(-6px); }
+}
+@keyframes pop {
+    from { transform: scale(0.5); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+@keyframes glowPulse {
+    0% { box-shadow: 0 0 5px gold; }
+    50% { box-shadow: 0 0 25px gold; }
+    100% { box-shadow: 0 0 5px gold; }
+        }
