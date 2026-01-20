@@ -1,24 +1,27 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Guntur Pulaos & Filter Coffees</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Path Race Game</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <h1 class="title">🍗 Guntur Pulaos & Filter Coffees ☕</h1>
-<p>Play while your biryani is getting ready 😋</p>
+<p class="subtitle">Race to the center while biryani is cooking 😋</p>
 
 <div class="board-container">
   <img src="images.jpeg" class="board">
 
-  <div id="youToken" class="token you"></div>
-  <div id="botToken" class="token bot"></div>
+  <div id="you" class="token you"></div>
+  <div id="bot" class="token bot"></div>
 </div>
 
-<h2 id="dice">0</h2>
+<div id="dice" class="dice">0</div>
 <button onclick="rollDice()">Roll Dice</button>
+
+<p id="status"></p>
 
 <script src="script.js"></script>
 </body>
