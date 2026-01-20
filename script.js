@@ -1,141 +1,97 @@
-const dice = document.getElementById("dice");
 const rollBtn = document.getElementById("rollBtn");
+const dice = document.getElementById("dice");
+const youToken = document.getElementById("youToken");
+const botToken = document.getElementById("botToken");
 const youUI = document.getElementById("you");
 const botUI = document.getElementById("bot");
-const playerToken = document.getElementById("playerToken");
-const botToken = document.getElementById("botToken");
 
-/* COUPON */
-const COUPON_KEY = "ultimateLudoCoupon";
-
-/* GAME STATE */
-let turn = "player";
-let diceValue = 0;
-
-/* PATH */
-const path = [
-    {x:20,y:230},{x:60,y:230},{x:100,y:230},{x:140,y:230},{x:180,y:230},
-    {x:220,y:230},{x:260,y:230},{x:260,y:190},{x:260,y:150},{x:260,y:110},
-    {x:260,y:70},{x:220,y:70},{x:180,y:70},{x:140,y:70},{x:100,y:70},
-    {x:60,y:70},{x:20,y:70},{x:20,y:110},{x:20,y:150},{x:20,y:190}
-];
-
-const SAFE_CELLS = [0,4,8,12,16];
-
-let playerPos = -1;
+let turn = "you";
+let youPos = -1;
 let botPos = -1;
 
-/* ROLL */
+const path = [
+  {x:10,y:160},{x:40,y:160},{x:70,y:160},{x:100,y:160},{x:130,y:160},
+  {x:160,y:160},{x:160,y:130},{x:160,y:100},{x:160,y:70},{x:160,y:40},
+  {x:130,y:40},{x:100,y:40},{x:70,y:40},{x:40,y:40},{x:10,y:40}
+];
+
 rollBtn.onclick = () => {
-    if (turn !== "player") return;
-    rollDice();
-    move("player");
+  if (turn !== "you") return;
+
+  const d = rollDice();
+  moveYou(d);
 };
 
 function rollDice() {
-    diceValue = Math.floor(Math.random() * 6) + 1;
-    dice.innerText = diceValue;
+  const d = Math.floor(Math.random() * 6) + 1;
+  dice.textContent = d;
+  return d;
 }
 
-/* MOVE */
-function move(who) {
-    let pos = who === "player" ? playerPos : botPos;
+function moveYou(d) {
+  if (youPos === -1 && d === 6) youPos = 0;
+  else if (youPos >= 0) youPos += d;
 
-    if (pos === -1 && diceValue === 6) pos = 0;
-    else if (pos >= 0) pos += diceValue;
+  if (youPos >= path.length) {
+    winGame();
+    return;
+  }
 
-    if (pos >= path.length) {
-        if (who === "player") {
-            alert("🎉 YOU WIN! Coupon unlocked!");
-            unlockCoupon();
-        } else {
-            alert("🤖 BOT WINS!");
-        }
-        resetGame();
-        return;
-    }
-
-    animateMove(who, pos);
+  updateTokens();
+  switchTurn();
+  setTimeout(botMove, 800);
 }
 
-/* ANIMATION */
-function animateMove(who, target) {
-    let current = who === "player" ? playerPos : botPos;
-    let token = who === "player" ? playerToken : botToken;
+function botMove() {
+  const d = rollDice();
 
-    function step() {
-        current++;
-        token.style.left = path[current].x + "px";
-        token.style.top = path[current].y + "px";
+  if (botPos === -1 && d === 6) botPos = 0;
+  else if (botPos >= 0) botPos += d;
 
-        if (current < target) {
-            setTimeout(step, 200);
-        } else {
-            if (who === "player") playerPos = current;
-            else botPos = current;
+  if (botPos >= path.length) {
+    alert("BOT WINS 🤖");
+    resetGame();
+    return;
+  }
 
-            checkKill();
-            switchTurn();
-        }
-    }
-    step();
+  updateTokens();
+  switchTurn();
 }
 
-/* BOT */
-function botPlay() {
-    rollDice();
-    move("bot");
+function updateTokens() {
+  if (youPos >= 0) {
+    youToken.style.left = path[youPos].x + "px";
+    youToken.style.top = path[youPos].y + "px";
+  }
+  if (botPos >= 0) {
+    botToken.style.left = path[botPos].x + "px";
+    botToken.style.top = path[botPos].y + "px";
+  }
 }
 
-/* KILL */
-function checkKill() {
-    if (
-        playerPos === botPos &&
-        playerPos !== -1 &&
-        !SAFE_CELLS.includes(playerPos)
-    ) {
-        if (turn === "player") botPos = -1;
-        else playerPos = -1;
-    }
-}
-
-/* TURN */
 function switchTurn() {
-    if (turn === "player") {
-        turn = "bot";
-        youUI.classList.remove("active");
-        botUI.classList.add("active");
-        setTimeout(botPlay, 1000);
-    } else {
-        turn = "player";
-        botUI.classList.remove("active");
-        youUI.classList.add("active");
-    }
+  turn = turn === "you" ? "bot" : "you";
+  youUI.classList.toggle("active", turn === "you");
+  botUI.classList.toggle("active", turn === "bot");
 }
 
-/* COUPON */
-function generateCoupon() {
-    return "BIRYANI" + Math.floor(1000 + Math.random() * 9000);
+function winGame() {
+  alert("🎉 YOU WIN!");
+  const code = "BIRYANI" + Math.floor(1000 + Math.random() * 9000);
+
+  document.getElementById("couponCode").textContent = code;
+  document.getElementById("coupon").classList.remove("hidden");
+  document.getElementById("whatsapp").href =
+    "https://wa.me/91XXXXXXXXXX?text=I%20won%20coupon%20" + code;
+
+  resetGame();
 }
 
-function unlockCoupon() {
-    if (localStorage.getItem(COUPON_KEY)) return;
-
-    const code = generateCoupon();
-    localStorage.setItem(COUPON_KEY, code);
-
-    document.getElementById("couponCode").innerText = code;
-    document.getElementById("couponBox").classList.remove("hidden");
-    document.getElementById("orderBtn").href =
-        "https://wa.me/91XXXXXXXXXX?text=I%20won%20coupon%20" + code;
-}
-
-/* RESET */
 function resetGame() {
-    playerPos = -1;
-    botPos = -1;
-    turn = "player";
-    dice.innerText = "🎲";
-    youUI.classList.add("active");
-    botUI.classList.remove("active");
+  youPos = -1;
+  botPos = -1;
+  turn = "you";
+  dice.textContent = "🎲";
+  updateTokens();
+  switchTurn();
 }
