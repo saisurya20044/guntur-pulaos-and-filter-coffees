@@ -7,9 +7,8 @@ let score = 0;
 let isGameOver = false;
 const WIN_SCORE = 100;
 
-/* Initial obstacle position */
 let obstacleX = 500;
-let speed = 6;
+let speed = 4.5;
 
 /* Jump */
 function jump() {
@@ -25,7 +24,7 @@ document.addEventListener("keydown", e => {
 });
 document.addEventListener("touchstart", jump);
 
-/* MAIN GAME LOOP */
+/* Game loop */
 function gameLoop() {
   if (isGameOver) return;
 
@@ -33,15 +32,15 @@ function gameLoop() {
   obstacleX -= speed;
   obstacle.style.left = obstacleX + "px";
 
-  if (obstacleX < -40) {
+  // Reset obstacle & score
+  if (obstacleX < -30) {
     obstacleX = 500;
     score++;
     scoreText.innerText = "Score: " + score;
-  }
 
-  // Increase difficulty
-  if (score % 10 === 0 && speed < 15) {
-    speed += 0.2;
+    if (score % 10 === 0 && speed < 10) {
+      speed += 0.3;
+    }
   }
 
   // 🏆 WIN
@@ -51,13 +50,13 @@ function gameLoop() {
   }
 
   // ❌ OUT (collision)
-  const dragonRect = dragon.getBoundingClientRect();
-  const obstacleRect = obstacle.getBoundingClientRect();
+  const d = dragon.getBoundingClientRect();
+  const o = obstacle.getBoundingClientRect();
 
   if (
-    obstacleRect.left < dragonRect.right &&
-    obstacleRect.right > dragonRect.left &&
-    obstacleRect.bottom > dragonRect.top + 20
+    o.left < d.right - 15 &&
+    o.right > d.left + 15 &&
+    d.bottom > o.top + 15
   ) {
     endGame("❌ OUT! Try again 😢");
     return;
@@ -66,17 +65,17 @@ function gameLoop() {
   requestAnimationFrame(gameLoop);
 }
 
-/* END GAME */
+/* End game */
 function endGame(message) {
   isGameOver = true;
   scoreText.innerText = message + " | Score: " + score;
   restartBtn.style.display = "inline-block";
 }
 
-/* RESTART */
+/* Restart */
 function restartGame() {
   location.reload();
 }
 
-/* START GAME */
+/* Start */
 gameLoop();
