@@ -1,48 +1,73 @@
-const youToken = document.getElementById("youToken");
-const botToken = document.getElementById("botToken");
-const dice = document.getElementById("dice");
+const you = document.getElementById("you");
+const bot = document.getElementById("bot");
+const diceEl = document.getElementById("dice");
+const status = document.getElementById("status");
 
-/* SAFE PATH INSIDE BOARD */
+/* MANUALLY MAPPED WHITE PATH (fits your image) */
 const path = [
-  {x:150,y:30},{x:190,y:30},{x:230,y:30},
-  {x:230,y:70},{x:230,y:110},{x:230,y:150},
-  {x:190,y:150},{x:150,y:150},{x:110,y:150},
-  {x:110,y:110},{x:110,y:70},{x:110,y:30}
+  {x:150,y:20}, {x:150,y:50}, {x:150,y:80}, {x:150,y:110},
+  {x:150,y:140}, {x:150,y:170}, {x:150,y:200},
+  {x:180,y:200}, {x:210,y:200}, {x:240,y:200},
+  {x:240,y:170}, {x:240,y:140}, {x:240,y:110},
+  {x:240,y:80},  {x:240,y:50},  {x:240,y:20},
+  {x:210,y:20},  {x:180,y:20},
+  {x:180,y:80},  {x:180,y:110}, {x:180,y:140}
 ];
 
 let youPos = 0;
 let botPos = 0;
 let turn = "YOU";
 
-update();
+updateTokens();
 
 function rollDice() {
   if (turn !== "YOU") return;
 
-  let roll = Math.floor(Math.random() * 6) + 1;
-  dice.innerText = roll;
+  const roll = Math.floor(Math.random() * 6) + 1;
+  diceEl.innerText = roll;
+  moveToken("YOU", roll);
+}
 
-  youPos = (youPos + roll) % path.length;
-  update();
-
-  turn = "BOT";
-  setTimeout(botTurn, 800);
+function moveToken(player, steps) {
+  if (player === "YOU") {
+    youPos += steps;
+    if (youPos >= path.length - 1) {
+      win("YOU");
+      return;
+    }
+    updateTokens();
+    turn = "BOT";
+    status.innerText = "Bot is playing...";
+    setTimeout(botTurn, 800);
+  }
 }
 
 function botTurn() {
-  let roll = Math.floor(Math.random() * 6) + 1;
-  dice.innerText = roll;
+  const roll = Math.floor(Math.random() * 6) + 1;
+  diceEl.innerText = roll;
+  botPos += roll;
 
-  botPos = (botPos + roll) % path.length;
-  update();
+  if (botPos >= path.length - 1) {
+    win("BOT");
+    return;
+  }
 
+  updateTokens();
   turn = "YOU";
+  status.innerText = "Your turn";
 }
 
-function update() {
-  youToken.style.left = path[youPos].x + "px";
-  youToken.style.top  = path[youPos].y + "px";
+function updateTokens() {
+  you.style.left = path[youPos].x + "px";
+  you.style.top  = path[youPos].y + "px";
 
-  botToken.style.left = path[botPos].x + "px";
-  botToken.style.top  = path[botPos].y + "px";
+  bot.style.left = (path[botPos].x + 12) + "px";
+  bot.style.top  = path[botPos].y + "px";
+}
+
+function win(who) {
+  status.innerText =
+    who === "YOU"
+      ? "🎉 You reached the center! You win!"
+      : "🤖 Bot reached the center!";
 }
