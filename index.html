@@ -3,31 +3,26 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Real Ludo – 4 Tokens</title>
-  <link rel="stylesheet" href="style.css?v=4tokens">
+  <title>Real Ludo Game</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<header class="header">
-  <h1>🍗 Guntur Pulaos & Filter Coffees ☕</h1>
-  <p>Real Ludo – 4 Tokens (You vs Bot)</p>
-</header>
+<h1 class="title">🎲 REAL LUDO</h1>
 
-<div class="card">
-
-  <div class="players">
-    <div id="you" class="player you active">YOU 🔴</div>
-    <div id="bot" class="player bot">BOT 🔵</div>
-  </div>
-
-  <!-- REAL LUDO BOARD -->
-  <div class="ludo-board" id="board"></div>
-
-  <div class="dice" id="dice">🎲</div>
-  <button id="rollBtn">Roll Dice</button>
-
+<div class="players">
+  <div id="you" class="player you active">YOU 🔴</div>
+  <div id="bot" class="player bot">BOT 🔵</div>
 </div>
 
-<script src="script.js?v=4tokens"></script>
+<!-- LUDO BOARD -->
+<div class="ludo-board" id="board"></div>
+
+<div class="controls">
+  <div id="dice" class="dice">🎲</div>
+  <button id="rollBtn">Roll Dice</button>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
