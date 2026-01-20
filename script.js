@@ -1,109 +1,64 @@
-const board = document.getElementById("board");
-const rollBtn = document.getElementById("rollBtn");
-const dice = document.getElementById("dice");
-const youUI = document.getElementById("you");
-const botUI = document.getElementById("bot");
+const redToken = document.getElementById("redToken");
+const blueToken = document.getElementById("blueToken");
+const diceUI = document.getElementById("dice");
 
-let turn = "you";
-let youPos = -1;
-let botPos = -1;
-
-/* SIMPLE REAL LUDO PATH (VISIBLE LOOP) */
-const path = [
-  7,8,9,10,11,
-  26,41,56,71,86,
-  101,102,103,104,105,
-  90,75,60,45,30,
-  15,14,13,12,11
+/*
+  OFFICIAL OUTER PATH (SIMPLIFIED)
+  Each entry = exact % position on board image
+  YOU CAN ADJUST VALUES if your image is different
+*/
+const PATH = [
+  { top: 72, left: 12 },
+  { top: 72, left: 18 },
+  { top: 72, left: 24 },
+  { top: 72, left: 30 },
+  { top: 72, left: 36 },
+  { top: 66, left: 36 },
+  { top: 60, left: 36 },
+  { top: 54, left: 36 },
+  { top: 48, left: 36 },
+  { top: 42, left: 36 },
+  { top: 36, left: 36 },
+  { top: 36, left: 30 },
+  { top: 36, left: 24 },
+  { top: 36, left: 18 },
+  { top: 36, left: 12 }
 ];
 
-/* CREATE BOARD */
-for (let i = 0; i < 225; i++) {
-  const cell = document.createElement("div");
-  cell.className = "cell";
-  cell.dataset.i = i;
+let redPos = -1;
+let bluePos = -1;
+let turn = "red";
 
-  if (path.includes(i)) cell.classList.add("path");
-  if (i < 30 && i % 15 < 5) cell.classList.add("red-home");
-  if (i > 194 && i % 15 > 9) cell.classList.add("blue-home");
-  if (i === 112) cell.classList.add("center");
-
-  board.appendChild(cell);
-}
-
-/* ROLL */
-rollBtn.onclick = () => {
-  if (turn !== "you") return;
-
+function rollDice() {
   const d = Math.floor(Math.random() * 6) + 1;
-  dice.textContent = d;
-  moveYou(d);
-};
+  diceUI.innerText = d;
 
-function moveYou(d) {
-  if (youPos === -1 && d === 6) youPos = 0;
-  else if (youPos >= 0) youPos += d;
-
-  if (youPos >= path.length) {
-    alert("YOU WIN 🎉");
-    reset();
-    return;
+  if (turn === "red") {
+    moveToken("red", d);
+    turn = "blue";
+    setTimeout(() => {
+      const bd = Math.floor(Math.random() * 6) + 1;
+      diceUI.innerText = bd;
+      moveToken("blue", bd);
+      turn = "red";
+    }, 800);
   }
-
-  render();
-  turn = "bot";
-  switchUI();
-  setTimeout(botMove, 800);
 }
 
-function botMove() {
-  const d = Math.floor(Math.random() * 6) + 1;
-  dice.textContent = d;
+function moveToken(color, dice) {
+  let pos = color === "red" ? redPos : bluePos;
 
-  if (botPos === -1 && d === 6) botPos = 0;
-  else if (botPos >= 0) botPos += d;
+  if (pos === -1 && dice === 6) pos = 0;
+  else if (pos >= 0) pos += dice;
 
-  if (botPos >= path.length) {
-    alert("BOT WINS 🤖");
-    reset();
-    return;
-  }
+  if (pos >= PATH.length) pos = PATH.length - 1;
 
-  render();
-  turn = "you";
-  switchUI();
-}
+  const coord = PATH[pos];
+  const token = color === "red" ? redToken : blueToken;
 
-/* RENDER TOKENS */
-function render() {
-  document.querySelectorAll(".token").forEach(t => t.remove());
+  token.style.top = coord.top + "%";
+  token.style.left = coord.left + "%";
 
-  place(youPos, "red");
-  place(botPos, "blue");
-}
-
-function place(pos, color) {
-  if (pos < 0) return;
-  const cell = document.querySelector(`.cell[data-i="${path[pos]}"]`);
-  if (!cell) return;
-
-  const t = document.createElement("div");
-  t.className = `token ${color}-token`;
-  cell.appendChild(t);
-}
-
-/* TURN UI */
-function switchUI() {
-  youUI.classList.toggle("active", turn === "you");
-  botUI.classList.toggle("active", turn === "bot");
-}
-
-/* RESET */
-function reset() {
-  youPos = -1;
-  botPos = -1;
-  turn = "you";
-  dice.textContent = "🎲";
-  render();
-  switchUI();
+  if (color === "red") redPos = pos;
+  else bluePos = pos;
 }
