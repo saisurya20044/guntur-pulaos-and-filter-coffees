@@ -2,6 +2,7 @@ const dragon = document.getElementById("dragon");
 const obstacle = document.getElementById("obstacle");
 const scoreText = document.getElementById("score");
 const restartBtn = document.getElementById("restart");
+const couponMsg = document.getElementById("couponMsg");
 
 let score = 0;
 let isGameOver = false;
@@ -37,6 +38,12 @@ function gameLoop() {
     obstacleX = 500;
     score++;
     scoreText.innerText = "Score: " + score;
+    // 🎁 Coupon message at score 50
+if (score === COUPON_SCORE) {
+  couponMsg.style.display = "block";
+  couponMsg.innerText =
+    "🎉 You won a 10% DISCOUNT! Show this screen at the counter 😊";
+}
 
     if (score % 10 === 0 && speed < 10) {
       speed += 0.3;
