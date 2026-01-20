@@ -1,64 +1,114 @@
-const redToken = document.getElementById("redToken");
-const blueToken = document.getElementById("blueToken");
-const diceUI = document.getElementById("dice");
+const dice = document.getElementById("dice");
+const turnText = document.getElementById("turnText");
+const popup = document.getElementById("popup");
+const popupText = document.getElementById("popupText");
+const coupon = document.getElementById("coupon");
 
-/*
-  OFFICIAL OUTER PATH (SIMPLIFIED)
-  Each entry = exact % position on board image
-  YOU CAN ADJUST VALUES if your image is different
-*/
-const PATH = [
-  { top: 72, left: 12 },
-  { top: 72, left: 18 },
-  { top: 72, left: 24 },
-  { top: 72, left: 30 },
-  { top: 72, left: 36 },
-  { top: 66, left: 36 },
-  { top: 60, left: 36 },
-  { top: 54, left: 36 },
-  { top: 48, left: 36 },
-  { top: 42, left: 36 },
-  { top: 36, left: 36 },
-  { top: 36, left: 30 },
-  { top: 36, left: 24 },
-  { top: 36, left: 18 },
-  { top: 36, left: 12 }
+/* SIMPLE COMMON PATH (24 steps) */
+const path = [
+  {x:20,y:20},{x:60,y:20},{x:100,y:20},{x:140,y:20},{x:180,y:20},{x:220,y:20},
+  {x:220,y:60},{x:220,y:100},{x:220,y:140},{x:220,y:180},
+  {x:180,y:180},{x:140,y:180},{x:100,y:180},{x:60,y:180},{x:20,y:180},
+  {x:20,y:140},{x:20,y:100},{x:20,y:60},
+  {x:60,y:60},{x:100,y:60},{x:140,y:60},{x:180,y:60},
+  {x:180,y:100},{x:180,y:140}
 ];
 
-let redPos = -1;
-let bluePos = -1;
-let turn = "red";
+let turn = "YOU";
+let diceValue = 0;
 
-function rollDice() {
-  const d = Math.floor(Math.random() * 6) + 1;
-  diceUI.innerText = d;
+/* TOKENS */
+let you = [
+  {pos:-1, el:y0},{pos:-1, el:y1},{pos:-1, el:y2},{pos:-1, el:y3}
+];
+let bot = [
+  {pos:-1, el:b0},{pos:-1, el:b1},{pos:-1, el:b2},{pos:-1, el:b3}
+];
 
-  if (turn === "red") {
-    moveToken("red", d);
-    turn = "blue";
-    setTimeout(() => {
-      const bd = Math.floor(Math.random() * 6) + 1;
-      diceUI.innerText = bd;
-      moveToken("blue", bd);
-      turn = "red";
-    }, 800);
+placeHomes();
+
+function rollDice(){
+  if(turn !== "YOU") return;
+  diceValue = Math.floor(Math.random()*6)+1;
+  dice.innerText = diceValue;
+  movePlayer(you, bot, "YOU");
+}
+
+function movePlayer(player, enemy, who){
+  let token = player.find(t => t.pos >= 0) || player[0];
+
+  if(token.pos === -1){
+    if(diceValue === 6){
+      token.pos = 0;
+    } else {
+      endTurn();
+      return;
+    }
+  } else {
+    token.pos += diceValue;
+    if(token.pos >= path.length){
+      win(who);
+      return;
+    }
+  }
+
+  // KILL LOGIC
+  enemy.forEach(e=>{
+    if(e.pos === token.pos){
+      e.pos = -1;
+    }
+  });
+
+  updateTokens();
+  endTurn();
+}
+
+function endTurn(){
+  turn = turn === "YOU" ? "BOT" : "YOU";
+  turnText.innerText = turn + " TURN";
+
+  if(turn === "BOT"){
+    setTimeout(()=>{
+      diceValue = Math.floor(Math.random()*6)+1;
+      dice.innerText = diceValue;
+      movePlayer(bot, you, "BOT");
+    },1000);
   }
 }
 
-function moveToken(color, dice) {
-  let pos = color === "red" ? redPos : bluePos;
+function updateTokens(){
+  you.forEach((t,i)=>{
+    if(t.pos >= 0){
+      t.el.style.left = path[t.pos].x+"px";
+      t.el.style.top  = path[t.pos].y+"px";
+    } else {
+      t.el.style.left = "10px";
+      t.el.style.top  = (10+i*18)+"px";
+    }
+  });
 
-  if (pos === -1 && dice === 6) pos = 0;
-  else if (pos >= 0) pos += dice;
+  bot.forEach((t,i)=>{
+    if(t.pos >= 0){
+      t.el.style.left = path[t.pos].x+"px";
+      t.el.style.top  = path[t.pos].y+"px";
+    } else {
+      t.el.style.left = "290px";
+      t.el.style.top  = (10+i*18)+"px";
+    }
+  });
+}
 
-  if (pos >= PATH.length) pos = PATH.length - 1;
+function placeHomes(){
+  updateTokens();
+}
 
-  const coord = PATH[pos];
-  const token = color === "red" ? redToken : blueToken;
-
-  token.style.top = coord.top + "%";
-  token.style.left = coord.left + "%";
-
-  if (color === "red") redPos = pos;
-  else bluePos = pos;
+function win(who){
+  popup.style.display="flex";
+  if(who==="YOU"){
+    popupText.innerText="🎉 YOU WON!";
+    coupon.innerText="Coupon: BIRYANI50";
+  } else {
+    popupText.innerText="BOT WON 😅";
+    coupon.innerText="Try again!";
+  }
 }
