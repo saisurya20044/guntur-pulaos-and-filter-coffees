@@ -5,7 +5,7 @@ const restartBtn = document.getElementById("restart");
 
 let score = 0;
 let isGameOver = false;
-const WIN_SCORE = 100;
+const COUPON_SCORE = 50;
 
 let obstacleX = 500;
 let speed = 4.5;
@@ -43,11 +43,10 @@ function gameLoop() {
     }
   }
 
-  // 🏆 WIN
-  if (score >= WIN_SCORE) {
-    endGame("🎉 YOU WIN! Enjoy your biryani 😋");
-    return;
-  }
+// 🎁 COUPON at 70
+if (score === COUPON_SCORE) {
+  alert("🎉 Congrats! You won a 10% discount!\nShow this at counter 😊");
+}
 
   // ❌ OUT (collision)
   const d = dragon.getBoundingClientRect();
