@@ -5,21 +5,16 @@ const youUI = document.getElementById("you");
 const botUI = document.getElementById("bot");
 
 let turn = "you";
+let youPos = -1;
+let botPos = -1;
 
-/* 4 TOKENS EACH */
-let youTokens = [-1, -1, -1, -1];
-let botTokens = [-1, -1, -1, -1];
-
-/* OFFICIAL OUTER PATH (52 simplified indexes) */
+/* SIMPLE REAL LUDO PATH (VISIBLE LOOP) */
 const path = [
-  6,7,8,9,10,11,
-  26,41,56,71,86,101,
-  102,103,104,105,106,107,
-  92,77,62,47,32,17,
-  16,15,14,13,12,11,
-  26,41,56,71,86,101,
-  100,99,98,97,96,95,
-  80,65,50,35,20,5
+  7,8,9,10,11,
+  26,41,56,71,86,
+  101,102,103,104,105,
+  90,75,60,45,30,
+  15,14,13,12,11
 ];
 
 /* CREATE BOARD */
@@ -31,77 +26,84 @@ for (let i = 0; i < 225; i++) {
   if (path.includes(i)) cell.classList.add("path");
   if (i < 30 && i % 15 < 5) cell.classList.add("red-home");
   if (i > 194 && i % 15 > 9) cell.classList.add("blue-home");
+  if (i === 112) cell.classList.add("center");
 
   board.appendChild(cell);
 }
 
 /* ROLL */
 rollBtn.onclick = () => {
+  if (turn !== "you") return;
+
+  const d = Math.floor(Math.random() * 6) + 1;
+  dice.textContent = d;
+  moveYou(d);
+};
+
+function moveYou(d) {
+  if (youPos === -1 && d === 6) youPos = 0;
+  else if (youPos >= 0) youPos += d;
+
+  if (youPos >= path.length) {
+    alert("YOU WIN 🎉");
+    reset();
+    return;
+  }
+
+  render();
+  turn = "bot";
+  switchUI();
+  setTimeout(botMove, 800);
+}
+
+function botMove() {
   const d = Math.floor(Math.random() * 6) + 1;
   dice.textContent = d;
 
-  if (turn === "you") {
-    moveToken(youTokens, d);
-    turn = "bot";
-    switchUI();
-    setTimeout(() => {
-      const bd = Math.floor(Math.random() * 6) + 1;
-      dice.textContent = bd;
-      moveToken(botTokens, bd);
-      turn = "you";
-      switchUI();
-    }, 900);
-  }
-};
+  if (botPos === -1 && d === 6) botPos = 0;
+  else if (botPos >= 0) botPos += d;
 
-/* MOVE ONE TOKEN (SIMPLE AI: FIRST POSSIBLE) */
-function moveToken(tokens, diceVal) {
-  for (let i = 0; i < tokens.length; i++) {
-    if (tokens[i] === -1 && diceVal === 6) {
-      tokens[i] = 0;
-      render();
-      return;
-    }
-    if (tokens[i] >= 0) {
-      tokens[i] += diceVal;
-      if (tokens[i] >= path.length) tokens[i] = path.length - 1;
-      render();
-      return;
-    }
+  if (botPos >= path.length) {
+    alert("BOT WINS 🤖");
+    reset();
+    return;
   }
+
+  render();
+  turn = "you";
+  switchUI();
 }
 
-/* RENDER ALL TOKENS */
+/* RENDER TOKENS */
 function render() {
   document.querySelectorAll(".token").forEach(t => t.remove());
 
-  drawTokens(youTokens, "red");
-  drawTokens(botTokens, "blue");
+  place(youPos, "red");
+  place(botPos, "blue");
 }
 
-function drawTokens(tokens, color) {
-  const positions = {};
+function place(pos, color) {
+  if (pos < 0) return;
+  const cell = document.querySelector(`.cell[data-i="${path[pos]}"]`);
+  if (!cell) return;
 
-  tokens.forEach(pos => {
-    if (pos >= 0) {
-      const cellIndex = path[pos];
-      if (!positions[cellIndex]) positions[cellIndex] = [];
-      positions[cellIndex].push(color);
-    }
-  });
-
-  Object.keys(positions).forEach(cellIndex => {
-    const cell = document.querySelector(`.cell[data-i="${cellIndex}"]`);
-    positions[cellIndex].forEach((color, i) => {
-      const t = document.createElement("div");
-      t.className = `token ${color}-token t${i+1}`;
-      cell.appendChild(t);
-    });
-  });
+  const t = document.createElement("div");
+  t.className = `token ${color}-token`;
+  cell.appendChild(t);
 }
 
 /* TURN UI */
 function switchUI() {
   youUI.classList.toggle("active", turn === "you");
   botUI.classList.toggle("active", turn === "bot");
-        }
+}
+
+/* RESET */
+function reset() {
+  youPos = -1;
+  botPos = -1;
+  turn = "you";
+  dice.textContent = "🎲";
+  render();
+  switchUI();
+}
