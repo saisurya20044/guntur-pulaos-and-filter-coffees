@@ -1,88 +1,82 @@
 body {
-  margin: 0;
-  padding: 12px;
-  text-align: center;
   font-family: Arial, sans-serif;
-  background: #f2f2f2;
+  text-align: center;
+  background: #f4f4f4;
 }
 
-/* ANIMATED NAME */
-.restaurant-name {
-  font-size: 1.8rem;
-  font-weight: bold;
-  animation: glow 2s infinite alternate, float 3s infinite;
+.title {
+  font-size: 26px;
+  margin-top: 15px;
+  animation: glow 2s infinite alternate;
 }
 
 @keyframes glow {
-  from { text-shadow: 0 0 5px #ff7675; }
-  to { text-shadow: 0 0 20px #e17055; }
+  from { text-shadow: 0 0 5px orange; }
+  to { text-shadow: 0 0 15px red; }
 }
 
-@keyframes float {
-  50% { transform: translateY(-4px); }
-}
-
-.tagline {
-  font-size: 0.9rem;
+.subtitle {
   margin-bottom: 10px;
 }
 
-/* PLAYERS */
-.players {
-  display: flex;
-  justify-content: space-around;
-  margin-bottom: 8px;
-}
-
-.player {
-  padding: 6px 16px;
-  border-radius: 20px;
-  color: white;
+.turn {
   font-weight: bold;
+  margin-bottom: 10px;
 }
 
-.you { background: red; }
-.bot { background: blue; }
-.active { outline: 3px solid gold; }
-
-/* BOARD */
 .board-container {
   position: relative;
-  width: 90vw;
-  max-width: 360px;
+  width: 320px;
   margin: auto;
 }
 
 .board {
   width: 100%;
-  display: block;
+  border-radius: 10px;
 }
 
 /* TOKENS */
 .token {
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
   position: absolute;
-  transition: top 0.3s, left 0.3s;
+  transition: 0.4s;
 }
 
-.red { background: red; }
-.blue { background: blue; }
+.you { background: red; }
+.bot { background: blue; }
 
-/* CONTROLS */
 .controls {
-  margin-top: 10px;
+  margin-top: 15px;
 }
 
 .dice {
-  font-size: 2rem;
+  font-size: 40px;
+  margin: 10px;
 }
 
 button {
-  padding: 8px 22px;
-  border-radius: 20px;
+  padding: 10px 18px;
+  font-size: 16px;
   border: none;
-  background: #333;
+  background: black;
   color: white;
+  border-radius: 6px;
+}
+
+/* POPUP */
+.popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
 }
