@@ -1,27 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Guntur Pulaos & Filter Coffees – Ludo</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h1 class="restaurant-name">🍗 Guntur Pulaos & Filter Coffees ☕</h1>
-<p class="tagline">Play Ludo while your biryani is getting ready 😋</p>
+<h1 class="title">🍗 Guntur Pulaos & Filter Coffees ☕</h1>
+<p class="subtitle">Play Ludo while your biryani is getting ready 😋</p>
 
-<div class="players">
-  <div class="player you active">YOU 🔴</div>
-  <div class="player bot">BOT 🔵</div>
+<div class="turn">
+  <span id="turnText">YOUR TURN</span>
 </div>
 
-<!-- BOARD -->
 <div class="board-container">
-  <img src="images.jpeg" alt="Ludo Board" class="board">
-  <!-- TOKENS -->
-  <div id="redToken" class="token red"></div>
-  <div id="blueToken" class="token blue"></div>
+  <img src="images.jpeg" class="board">
+
+  <!-- YOU TOKENS -->
+  <div class="token you" id="y0"></div>
+  <div class="token you" id="y1"></div>
+  <div class="token you" id="y2"></div>
+  <div class="token you" id="y3"></div>
+
+  <!-- BOT TOKENS -->
+  <div class="token bot" id="b0"></div>
+  <div class="token bot" id="b1"></div>
+  <div class="token bot" id="b2"></div>
+  <div class="token bot" id="b3"></div>
 </div>
 
 <div class="controls">
@@ -29,9 +36,15 @@
   <button onclick="rollDice()">Roll Dice</button>
 </div>
 
+<!-- WIN POPUP -->
+<div id="popup" class="popup">
+  <div class="popup-content">
+    <h2 id="popupText"></h2>
+    <p id="coupon"></p>
+    <button onclick="location.reload()">Play Again</button>
+  </div>
+</div>
+
 <script src="script.js"></script>
 </body>
 </html>
-
-
-
