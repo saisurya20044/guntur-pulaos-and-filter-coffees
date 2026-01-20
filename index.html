@@ -1,50 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Guntur Pulaos & Filter Coffees</title>
-
-  <link rel="stylesheet" href="style.css?v=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Real Ludo – 4 Tokens</title>
+  <link rel="stylesheet" href="style.css?v=4tokens">
 </head>
 <body>
 
-  <header class="header">
-    <h1>🍗 Guntur Pulaos & Filter Coffees ☕</h1>
-    <p>Play Ludo while your biryani is getting ready 😋</p>
-  </header>
+<header class="header">
+  <h1>🍗 Guntur Pulaos & Filter Coffees ☕</h1>
+  <p>Real Ludo – 4 Tokens (You vs Bot)</p>
+</header>
 
-  <div class="card">
-    <div class="players">
-      <div id="you" class="player you active">YOU 🔴</div>
-      <div id="bot" class="player bot">BOT 🔵</div>
-    </div>
+<div class="card">
 
-    <div class="board">
-      <div id="youToken" class="token red"></div>
-      <div id="botToken" class="token blue"></div>
-    </div>
-
-    <div id="dice" class="dice">🎲</div>
-    <button id="rollBtn">Roll Dice</button>
+  <div class="players">
+    <div id="you" class="player you active">YOU 🔴</div>
+    <div id="bot" class="player bot">BOT 🔵</div>
   </div>
 
-  <div class="card">
-    <h2>🍽 Our Menu</h2>
-    <div class="menu-item">🍗 Chicken Biryani – ₹180</div>
-    <div class="menu-item">🥗 Veg Biryani – ₹140</div>
-    <div class="menu-item">☕ Filter Coffee – ₹40</div>
+  <!-- REAL LUDO BOARD -->
+  <div class="ludo-board" id="board"></div>
 
-    <div id="coupon" class="coupon hidden">
-      🎉 Coupon Won: <span id="couponCode"></span>
-    </div>
+  <div class="dice" id="dice">🎲</div>
+  <button id="rollBtn">Roll Dice</button>
 
-    <a id="whatsapp" class="whatsapp" target="_blank">
-      Order on WhatsApp
-    </a>
-  </div>
+</div>
 
-  
-  <script src="script.js?v=1"></script>
+<script src="script.js?v=4tokens"></script>
 </body>
 </html>
