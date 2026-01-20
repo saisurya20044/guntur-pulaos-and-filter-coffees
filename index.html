@@ -3,24 +3,31 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Real Ludo Game</title>
+  <title>Guntur Pulaos & Filter Coffees – Ludo</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h1 class="title">🎲 REAL LUDO</h1>
+<h1 class="restaurant-name">🍗 Guntur Pulaos & Filter Coffees ☕</h1>
+<p class="tagline">Play Ludo while your biryani is getting ready 😋</p>
 
 <div class="players">
-  <div id="you" class="player you active">YOU 🔴</div>
-  <div id="bot" class="player bot">BOT 🔵</div>
+  <div class="player you active">YOU 🔴</div>
+  <div class="player bot">BOT 🔵</div>
 </div>
 
-<!-- LUDO BOARD -->
-<div class="ludo-board" id="board"></div>
+<!-- BOARD -->
+<div class="board-container">
+  <img src="./board.png" class="board" alt="Ludo Board">
+
+  <!-- TOKENS -->
+  <div id="redToken" class="token red"></div>
+  <div id="blueToken" class="token blue"></div>
+</div>
 
 <div class="controls">
   <div id="dice" class="dice">🎲</div>
-  <button id="rollBtn">Roll Dice</button>
+  <button onclick="rollDice()">Roll Dice</button>
 </div>
 
 <script src="script.js"></script>
