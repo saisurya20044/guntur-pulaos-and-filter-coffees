@@ -3,25 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Path Race Game</title>
+  <title>Dragon Run | Guntur Pulaos</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h1 class="title">🍗 Guntur Pulaos & Filter Coffees ☕</h1>
-<p class="subtitle">Race to the center while biryani is cooking 😋</p>
+<!-- Animated Restaurant Logo -->
+<h1 class="logo">
+  🍗 Guntur Pulaos & Filter Coffees ☕
+</h1>
+<p class="tagline">Jump while your biryani is getting ready 😋</p>
 
-<div class="board-container">
-  <img src="images.jpeg" class="board">
-
-  <div id="you" class="token you"></div>
-  <div id="bot" class="token bot"></div>
+<!-- Game Area -->
+<div class="game">
+  <div id="dragon"></div>
+  <div id="obstacle"></div>
 </div>
 
-<div id="dice" class="dice">0</div>
-<button onclick="rollDice()">Roll Dice</button>
+<h2 id="score">Score: 0</h2>
+<p class="hint">Tap screen or press SPACE to jump</p>
 
-<p id="status"></p>
+<button id="restart" onclick="restartGame()">Restart</button>
 
 <script src="script.js"></script>
 </body>
