@@ -7,26 +7,21 @@
 
 body {
   background: #f2f2f2;
-  text-align: center;
   padding: 12px;
+  text-align: center;
 }
 
 .header {
   background: linear-gradient(90deg, #b33939, #ff6f61);
   color: white;
-  padding: 20px;
+  padding: 18px;
   border-radius: 16px;
   margin-bottom: 15px;
 }
 
-.header h1 {
-  font-size: 1.6rem;
-}
-
 .card {
   background: white;
-  padding: 15px;
-  margin-bottom: 20px;
+  padding: 12px;
   border-radius: 18px;
   box-shadow: 0 6px 15px rgba(0,0,0,0.15);
 }
@@ -44,70 +39,64 @@ body {
   font-weight: bold;
 }
 
-.you { background: red; }
-.bot { background: blue; }
+.you { background: #e74c3c; }
+.bot { background: #3498db; }
 
 .active {
   outline: 3px solid gold;
 }
 
-.board {
-  position: relative;
-  height: 200px;
-  border: 2px dashed #ccc;
-  border-radius: 12px;
-  margin: 12px 0;
+/* LUDO BOARD */
+.ludo-board {
+  display: grid;
+  grid-template-columns: repeat(15, 1fr);
+  grid-template-rows: repeat(15, 1fr);
+  max-width: 330px;
+  aspect-ratio: 1 / 1;
+  margin: 12px auto;
+  border: 3px solid #333;
 }
 
+.cell {
+  border: 1px solid #ccc;
+  background: #fff;
+  position: relative;
+}
+
+/* PATH */
+.path { background: #ecf0f1; }
+
+/* HOMES */
+.red-home { background: #f8c9c9; }
+.blue-home { background: #cfe2ff; }
+
+/* TOKEN */
 .token {
-  width: 18px;
-  height: 18px;
+  width: 45%;
+  height: 45%;
   border-radius: 50%;
   position: absolute;
-  transition: 0.3s;
 }
 
-.red { background: red; }
-.blue { background: blue; }
+.red-token { background: #e74c3c; }
+.blue-token { background: #3498db; }
+
+/* token positions inside a cell (max 4) */
+.t1 { top: 5%; left: 5%; }
+.t2 { top: 5%; right: 5%; }
+.t3 { bottom: 5%; left: 5%; }
+.t4 { bottom: 5%; right: 5%; }
 
 .dice {
-  font-size: 2rem;
+  font-size: 2.2rem;
   margin: 8px 0;
 }
 
 button {
-  padding: 8px 20px;
+  padding: 10px 22px;
   border: none;
-  border-radius: 20px;
+  border-radius: 25px;
   background: #b33939;
   color: white;
   font-size: 1rem;
-}
-
-.menu-item {
-  padding: 8px;
-  border-bottom: 1px solid #eee;
-}
-
-.coupon {
-  background: #ffeaa7;
-  padding: 12px;
-  border-radius: 14px;
-  margin-top: 10px;
-  font-weight: bold;
-}
-
-.hidden {
-  display: none;
-}
-
-.whatsapp {
-  display: block;
-  margin-top: 12px;
-  padding: 10px;
-  background: #25D366;
-  color: white;
-  text-decoration: none;
-  border-radius: 25px;
-  font-weight: bold;
 }
