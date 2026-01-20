@@ -56,8 +56,7 @@ body {
   background: green;
   position: absolute;
   bottom: 0;
-  right: -20px;
-  animation: move 2s linear infinite;
+  left: 500px;   
 }
 
 @keyframes move {
