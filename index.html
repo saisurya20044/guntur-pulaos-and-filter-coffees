@@ -1,56 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Guntur Pulaos & Filter Coffees | Ultimate Ludo</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guntur Pulaos & Filter Coffees</title>
+
+  <link rel="stylesheet" href="style.css?v=1">
 </head>
 <body>
 
-<header class="brand">
-    <h1 class="restaurant-name">🍗 Guntur Pulaos & Filter Coffees ☕</h1>
-    <p class="tagline">Play Ludo while your biryani is getting ready 😋</p>
-</header>
+  <header class="header">
+    <h1>🍗 Guntur Pulaos & Filter Coffees ☕</h1>
+    <p>Play Ludo while your biryani is getting ready 😋</p>
+  </header>
 
-<!-- 🎮 GAME -->
-<div class="game-wrapper">
-
-    <div class="player-info">
-        <div class="player you active" id="you">YOU 🔴</div>
-        <div class="player bot" id="bot">BOT 🔵</div>
+  <div class="card">
+    <div class="players">
+      <div id="you" class="player you active">YOU 🔴</div>
+      <div id="bot" class="player bot">BOT 🔵</div>
     </div>
 
-    <div class="ludo-board">
-        <div class="token red-token" id="playerToken"></div>
-        <div class="token blue-token" id="botToken"></div>
+    <div class="board">
+      <div id="youToken" class="token red"></div>
+      <div id="botToken" class="token blue"></div>
     </div>
 
-    <div class="dice-box">
-        <div id="dice" class="dice">🎲</div>
-        <button id="rollBtn">Roll Dice</button>
-    </div>
-</div>
+    <div id="dice" class="dice">🎲</div>
+    <button id="rollBtn">Roll Dice</button>
+  </div>
 
-<!-- 🍽️ MENU + COUPON -->
-<section class="menu">
-    <h2>🍽️ Our Menu</h2>
+  <div class="card">
+    <h2>🍽 Our Menu</h2>
+    <div class="menu-item">🍗 Chicken Biryani – ₹180</div>
+    <div class="menu-item">🥗 Veg Biryani – ₹140</div>
+    <div class="menu-item">☕ Filter Coffee – ₹40</div>
 
-    <div class="item">🍗 Chicken Biryani – ₹180</div>
-    <div class="item">🥗 Veg Biryani – ₹140</div>
-    <div class="item">☕ Filter Coffee – ₹40</div>
-
-    <div id="couponBox" class="coupon hidden">
-        🎉 You Won a Coupon! <br>
-        <strong id="couponCode"></strong><br>
-        <small>Show this at counter / WhatsApp</small>
+    <div id="coupon" class="coupon hidden">
+      🎉 Coupon Won: <span id="couponCode"></span>
     </div>
 
-    <a id="orderBtn" class="order-btn" target="_blank">
-        Order on WhatsApp
+    <a id="whatsapp" class="whatsapp" target="_blank">
+      Order on WhatsApp
     </a>
-</section>
+  </div>
 
-<script src="script.js"></script>
+  
+  <script src="script.js?v=1"></script>
 </body>
 </html>
