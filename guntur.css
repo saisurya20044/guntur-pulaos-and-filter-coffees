@@ -1,177 +1,145 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Segoe UI", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
 }
 
 body {
-    background: linear-gradient(135deg, #fdfbfb, #ebedee);
-    text-align: center;
+  background: #f5f5f5;
+  padding: 12px;
+  text-align: center;
 }
 
-/* BRAND */
+/* HEADER */
 .brand {
-    background: linear-gradient(90deg, #b33939, #ff6f61);
-    color: white;
-    padding: 20px 10px;
+  background: linear-gradient(90deg, #b33939, #ff6f61);
+  color: white;
+  padding: 20px 10px;
+  border-radius: 16px;
+  margin-bottom: 15px;
 }
 
 .restaurant-name {
-    font-size: 2rem;
-    font-weight: bold;
-    position: relative;
-    animation: glow 2s infinite alternate, float 3s infinite;
-}
-
-.restaurant-name::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-        120deg,
-        transparent,
-        rgba(255,255,255,0.6),
-        transparent
-    );
-    transform: translateX(-100%);
-    animation: shine 3s infinite;
+  font-size: 1.6rem;
+  font-weight: bold;
 }
 
 .tagline {
-    font-size: 0.9rem;
+  font-size: 0.9rem;
+  margin-top: 6px;
 }
 
-/* GAME */
+/* GAME CARD */
 .game-wrapper {
-    max-width: 360px;
-    margin: 15px auto;
+  background: white;
+  border-radius: 18px;
+  padding: 15px;
+  margin-bottom: 20px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
 }
 
 .player-info {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 10px;
 }
 
 .player {
-    padding: 6px 14px;
-    border-radius: 20px;
-    color: white;
-    font-weight: bold;
+  padding: 6px 14px;
+  border-radius: 20px;
+  color: white;
+  font-weight: bold;
+  font-size: 0.9rem;
 }
 
 .you { background: #d63031; }
 .bot { background: #0984e3; }
 
 .player.active {
-    box-shadow: 0 0 15px white;
+  outline: 3px solid gold;
 }
 
 /* BOARD */
 .ludo-board {
-    position: relative;
-    height: 260px;
-    background: white;
-    border-radius: 20px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-    margin-bottom: 12px;
+  position: relative;
+  height: 220px;
+  background: #fafafa;
+  border-radius: 14px;
+  margin: 12px 0;
+  border: 2px dashed #ddd;
 }
 
 /* TOKENS */
 .token {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    position: absolute;
-    transition: top 0.3s ease, left 0.3s ease;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  position: absolute;
+  transition: 0.3s;
 }
 
-.red-token { background: #d63031; }
-.blue-token { background: #0984e3; }
+.red-token { background: red; }
+.blue-token { background: blue; }
 
 /* DICE */
 .dice-box {
-    background: white;
-    padding: 10px;
-    border-radius: 15px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  margin-top: 10px;
 }
 
 .dice {
-    font-size: 2rem;
+  font-size: 2rem;
+  margin-bottom: 6px;
 }
 
 button {
-    margin-top: 8px;
-    padding: 6px 20px;
-    border: none;
-    border-radius: 20px;
-    background: #b33939;
-    color: white;
-    cursor: pointer;
+  padding: 8px 20px;
+  border: none;
+  border-radius: 20px;
+  background: #b33939;
+  color: white;
+  font-size: 1rem;
 }
 
 /* MENU */
 .menu {
-    margin: 20px auto;
-    padding: 15px;
-    background: white;
-    border-radius: 20px;
-    max-width: 360px;
-    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+  background: white;
+  border-radius: 18px;
+  padding: 15px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
 }
 
 .menu h2 {
-    color: #b33939;
-    margin-bottom: 10px;
+  color: #b33939;
+  margin-bottom: 10px;
 }
 
 .item {
-    padding: 8px;
-    border-bottom: 1px solid #eee;
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+  font-size: 0.95rem;
 }
 
+/* COUPON */
 .coupon {
-    margin-top: 12px;
-    padding: 12px;
-    background: linear-gradient(135deg, #ffeaa7, #fab1a0);
-    border-radius: 15px;
-    animation: pop 0.6s ease, glowPulse 1.5s infinite;
+  margin-top: 12px;
+  padding: 12px;
+  background: #ffeaa7;
+  border-radius: 14px;
+  font-weight: bold;
 }
 
 .hidden {
-    display: none;
+  display: none;
 }
 
 .order-btn {
-    display: block;
-    margin-top: 12px;
-    padding: 10px;
-    background: #25D366;
-    color: white;
-    text-decoration: none;
-    border-radius: 25px;
-    font-weight: bold;
+  display: block;
+  margin-top: 12px;
+  padding: 10px;
+  background: #25D366;
+  color: white;
+  text-decoration: none;
+  border-radius: 25px;
+  font-weight: bold;
 }
-
-/* ANIMATIONS */
-@keyframes glow {
-    from { text-shadow: 0 0 5px #fff; }
-    to { text-shadow: 0 0 20px #ffeaa7; }
-}
-@keyframes shine {
-    to { transform: translateX(100%); }
-}
-@keyframes float {
-    50% { transform: translateY(-6px); }
-}
-@keyframes pop {
-    from { transform: scale(0.5); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
-}
-@keyframes glowPulse {
-    0% { box-shadow: 0 0 5px gold; }
-    50% { box-shadow: 0 0 25px gold; }
-    100% { box-shadow: 0 0 5px gold; }
-        }
