@@ -6,40 +6,32 @@
 }
 
 body {
-  background: #f5f5f5;
-  padding: 12px;
+  background: #f2f2f2;
   text-align: center;
+  padding: 12px;
 }
 
-/* HEADER */
-.brand {
+.header {
   background: linear-gradient(90deg, #b33939, #ff6f61);
   color: white;
-  padding: 20px 10px;
+  padding: 20px;
   border-radius: 16px;
   margin-bottom: 15px;
 }
 
-.restaurant-name {
+.header h1 {
   font-size: 1.6rem;
-  font-weight: bold;
 }
 
-.tagline {
-  font-size: 0.9rem;
-  margin-top: 6px;
-}
-
-/* GAME CARD */
-.game-wrapper {
+.card {
   background: white;
-  border-radius: 18px;
   padding: 15px;
   margin-bottom: 20px;
+  border-radius: 18px;
   box-shadow: 0 6px 15px rgba(0,0,0,0.15);
 }
 
-.player-info {
+.players {
   display: flex;
   justify-content: space-around;
   margin-bottom: 10px;
@@ -50,27 +42,23 @@ body {
   border-radius: 20px;
   color: white;
   font-weight: bold;
-  font-size: 0.9rem;
 }
 
-.you { background: #d63031; }
-.bot { background: #0984e3; }
+.you { background: red; }
+.bot { background: blue; }
 
-.player.active {
+.active {
   outline: 3px solid gold;
 }
 
-/* BOARD */
-.ludo-board {
+.board {
   position: relative;
-  height: 220px;
-  background: #fafafa;
-  border-radius: 14px;
+  height: 200px;
+  border: 2px dashed #ccc;
+  border-radius: 12px;
   margin: 12px 0;
-  border: 2px dashed #ddd;
 }
 
-/* TOKENS */
 .token {
   width: 18px;
   height: 18px;
@@ -79,17 +67,12 @@ body {
   transition: 0.3s;
 }
 
-.red-token { background: red; }
-.blue-token { background: blue; }
-
-/* DICE */
-.dice-box {
-  margin-top: 10px;
-}
+.red { background: red; }
+.blue { background: blue; }
 
 .dice {
   font-size: 2rem;
-  margin-bottom: 6px;
+  margin: 8px 0;
 }
 
 button {
@@ -101,31 +84,16 @@ button {
   font-size: 1rem;
 }
 
-/* MENU */
-.menu {
-  background: white;
-  border-radius: 18px;
-  padding: 15px;
-  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
-}
-
-.menu h2 {
-  color: #b33939;
-  margin-bottom: 10px;
-}
-
-.item {
-  padding: 8px 0;
+.menu-item {
+  padding: 8px;
   border-bottom: 1px solid #eee;
-  font-size: 0.95rem;
 }
 
-/* COUPON */
 .coupon {
-  margin-top: 12px;
-  padding: 12px;
   background: #ffeaa7;
+  padding: 12px;
   border-radius: 14px;
+  margin-top: 10px;
   font-weight: bold;
 }
 
@@ -133,7 +101,7 @@ button {
   display: none;
 }
 
-.order-btn {
+.whatsapp {
   display: block;
   margin-top: 12px;
   padding: 10px;
