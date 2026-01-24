@@ -10,7 +10,7 @@ const game = document.getElementById("game");
 let score, speed, obstacleX, bgX, groundX, isGameOver;
 const COUPON_SCORE = 50;
 
-/* RESET GAME */
+/* RESET */
 function resetGame() {
   score = 0;
   speed = 4.5;
@@ -40,7 +40,7 @@ document.addEventListener("keydown", e => {
 });
 document.addEventListener("touchstart", jump);
 
-/* GAME LOOP */
+/* LOOP */
 function gameLoop() {
   if (isGameOver) return;
 
