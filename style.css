@@ -1,18 +1,32 @@
+* {
+  box-sizing: border-box;
+}
+
 html, body {
-  width: 100%;
-  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  height: 100%;
 }
 
 body {
-  margin: 0;
   text-align: center;
   font-family: Arial, sans-serif;
-  background: #f5f5f5;
+  background: #f2f2f2;
 }
 
-/* Logo glow */
+/* ===== TEXT ===== */
+
 .logo {
   animation: glow 2s infinite alternate;
+}
+
+.subtitle {
+  margin-top: 4px;
+}
+
+.offer {
+  color: green;
+  font-weight: bold;
 }
 
 @keyframes glow {
@@ -20,71 +34,86 @@ body {
   to   { text-shadow: 0 0 15px red; }
 }
 
-/* ================= GAME ================= */
+/* ===== GAME ===== */
 
 .game {
-  width: 90%;
-  max-width: 500px;
-  height: 220px;
-  margin: 20px auto;
+  width: 100%;
+  max-width: 520px;
+  height: 60vh; /* desktop */
+  margin: 12px auto;
   position: relative;
   overflow: hidden;
-  border-radius: 16px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+  border-radius: 18px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+  background: #87ceeb;
 }
 
-/* 🖼️ Moving image background */
+/* 📱 FULLSCREEN MOBILE */
+@media (max-width: 768px) {
+  body {
+    overflow: hidden;
+  }
+
+  .game {
+    height: 100dvh;   /* real mobile fullscreen */
+    max-width: none;
+    margin: 0;
+    border-radius: 0;
+  }
+}
+
+/* ===== MOVING BACKGROUND ===== */
+
 .bg {
   position: absolute;
-  top: 0;
-  left: 0;
+  inset: 0;
   width: 200%;
   height: 100%;
-
-  background-image: url("https://www.imghippo.com/i/sbx8294ZH.jpeg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: repeat-x;
-
+  background: url("https://www.imghippo.com/i/sbx8294ZH.jpeg")
+              repeat-x center / cover;
   z-index: 0;
 }
 
-/* 🟫 Ground */
+/* ===== GROUND ===== */
+
 .ground {
   position: absolute;
   bottom: 0;
   width: 200%;
-  height: 30px;
+  height: 32px;
   background: repeating-linear-gradient(
     45deg,
     #8b4513,
-    #8b4513 10px,
-    #a0522d 10px,
-    #a0522d 20px
+    #8b4513 12px,
+    #a0522d 12px,
+    #a0522d 24px
   );
   z-index: 1;
 }
 
-/* 🐔 Dragon (player) */
+/* ===== PLAYER ===== */
+
 #dragon {
   position: absolute;
-  bottom: 30px;
-  left: 15%;
-  font-size: 36px;
+  bottom: 32px;
+  left: 18%;
+  font-size: 38px;
   line-height: 1;
   z-index: 2;
 }
 
-/* 🌶️ Obstacle */
+/* ===== OBSTACLE ===== */
+
 #obstacle {
   position: absolute;
-  bottom: 30px;
-  font-size: 32px;
+  bottom: 32px;
   left: 600px;
+  font-size: 32px;
   z-index: 2;
 }
 
-/* Jump animation */
+/* ===== JUMP ===== */
+
 .jump {
   animation: jump 0.5s ease;
 }
@@ -95,9 +124,25 @@ body {
   100% { transform: translateY(0); }
 }
 
-/* Restart button */
+/* ===== UI ===== */
+
+.controls {
+  margin-top: 8px;
+}
+
+#restart,
+#fullscreenBtn {
+  padding: 8px 20px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
 #restart {
   display: none;
-  padding: 8px 20px;
-  font-size: 14px;
+}
+
+.coupon {
+  display: none;
+  color: green;
+  font-weight: bold;
 }
