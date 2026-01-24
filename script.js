@@ -3,6 +3,8 @@ const obstacle = document.getElementById("obstacle");
 const scoreText = document.getElementById("score");
 const restartBtn = document.getElementById("restart");
 const couponMsg = document.getElementById("couponMsg");
+const bg = document.getElementById("bg");
+const ground = document.getElementById("ground");
 
 let score = 0;
 let isGameOver = false;
@@ -10,6 +12,10 @@ const COUPON_SCORE = 50;
 
 let obstacleX = 500;
 let speed = 4.5;
+
+/* background movement */
+let bgX = 0;
+let groundX = 0;
 
 /* Jump */
 function jump() {
@@ -29,33 +35,40 @@ document.addEventListener("touchstart", jump);
 function gameLoop() {
   if (isGameOver) return;
 
-  // Move obstacle
+  /* 🌄 move background */
+  bgX -= 0.3;
+  if (bgX <= -50) bgX = 0;
+  bg.style.transform = `translateX(${bgX}%)`;
+
+  /* 🟫 move ground */
+  groundX -= 1.5;
+  if (groundX <= -50) groundX = 0;
+  ground.style.transform = `translateX(${groundX}%)`;
+
+  /* 🌶️ move obstacle */
   obstacleX -= speed;
   obstacle.style.left = obstacleX + "px";
 
-  // Reset obstacle & score
-  if (obstacleX < -30) {
+  /* reset obstacle & score */
+  if (obstacleX < -40) {
     obstacleX = 500;
     score++;
     scoreText.innerText = "Score: " + score;
-    // 🎁 Coupon message at score 50
-if (score === COUPON_SCORE) {
-  couponMsg.style.display = "block";
-  couponMsg.innerText =
-    "🎉 You won a 10% DISCOUNT! Show this screen at the counter 😊";
-}
 
+    /* 🎁 coupon at 50 */
+    if (score === COUPON_SCORE) {
+      couponMsg.style.display = "block";
+      couponMsg.innerText =
+        "🎉 You won a 10% DISCOUNT! Show this screen at the counter 😊";
+    }
+
+    /* increase difficulty */
     if (score % 10 === 0 && speed < 10) {
       speed += 0.3;
     }
   }
 
-// 🎁 COUPON at 70
-if (score === COUPON_SCORE) {
-  alert("🎉 Congrats! You won a 10% discount!\nShow this at counter 😊");
-}
-
-  // ❌ OUT (collision)
+  /* ❌ collision */
   const d = dragon.getBoundingClientRect();
   const o = obstacle.getBoundingClientRect();
 
@@ -83,5 +96,5 @@ function restartGame() {
   location.reload();
 }
 
-/* Start */
+/* Start game */
 gameLoop();
