@@ -6,7 +6,6 @@ const couponMsg = document.getElementById("couponMsg");
 const bg = document.getElementById("bg");
 const ground = document.getElementById("ground");
 const game = document.getElementById("game");
-const fullscreenBtn = document.getElementById("fullscreenBtn");
 
 let score, speed, obstacleX, bgX, groundX, isGameOver;
 const COUPON_SCORE = 50;
@@ -45,17 +44,14 @@ document.addEventListener("touchstart", jump);
 function gameLoop() {
   if (isGameOver) return;
 
-  /* move background */
   bgX -= 0.25;
   if (bgX <= -50) bgX = 0;
   bg.style.transform = `translateX(${bgX}%)`;
 
-  /* move ground */
   groundX -= 1.4;
   if (groundX <= -50) groundX = 0;
   ground.style.transform = `translateX(${groundX}%)`;
 
-  /* move obstacle */
   obstacleX -= speed;
   obstacle.style.left = obstacleX + "px";
 
@@ -73,7 +69,6 @@ function gameLoop() {
     }
   }
 
-  /* collision */
   const d = dragon.getBoundingClientRect();
   const o = obstacle.getBoundingClientRect();
 
@@ -82,31 +77,16 @@ function gameLoop() {
     o.right > d.left + 12 &&
     d.bottom > o.top + 10
   ) {
-    endGame();
+    isGameOver = true;
+    scoreText.innerText = `❌ OUT! Try again 😢 | Score: ${score}`;
+    restartBtn.style.display = "inline-block";
     return;
   }
 
   requestAnimationFrame(gameLoop);
 }
 
-/* END GAME */
-function endGame() {
-  isGameOver = true;
-  scoreText.innerText = `❌ OUT! Try again 😢 | Score: ${score}`;
-  restartBtn.style.display = "inline-block";
-}
-
-/* RESTART */
 restartBtn.addEventListener("click", resetGame);
-
-/* FULLSCREEN */
-fullscreenBtn.addEventListener("click", () => {
-  if (!document.fullscreenElement) {
-    document.documentElement.requestFullscreen().catch(() => {});
-  } else {
-    document.exitFullscreen();
-  }
-});
 
 /* START */
 resetGame();
