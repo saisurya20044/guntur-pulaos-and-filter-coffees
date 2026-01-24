@@ -1,27 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Guntur Pulaos & Filter Coffees</title>
 
   <!-- cache buster -->
-  <link rel="stylesheet" href="style.css?v=FINAL">
+  <link rel="stylesheet" href="style.css?v=FINAL2">
 </head>
 <body>
 
-<h1 class="logo">🍗 Guntur Pulaos & Filter Coffees ☕</h1>
-<p class="subtitle">Jump while your biryani is getting ready 😋</p>
+<!-- HEADER -->
+<div class="header">
+  <h1 class="logo">🍗 Guntur Pulaos & Filter Coffees ☕</h1>
+  <p class="subtitle">Jump while your biryani is getting ready 😋</p>
+  <p class="offer">🎁 Score 50 to get <b>10% Discount</b></p>
+</div>
 
-<p class="offer">🎁 Score 50 to get <b>10% Discount</b></p>
-
+<!-- GAME -->
 <div class="game" id="game">
   <div id="bg" class="bg"></div>
 
-  <div id="dragon">🐔</div>
-  <div id="obstacle">🌶️</div>
+  <!-- chicken wrapped to prevent flip -->
+  <div id="dragon">
+    <span class="chicken">🐔</span>
+  </div>
 
+  <div id="obstacle">🌶️</div>
   <div id="ground" class="ground"></div>
 </div>
 
@@ -33,11 +39,8 @@
 
 <p class="hint">Tap screen or press SPACE to jump</p>
 
-<div class="controls">
-  <button id="restart">Restart</button>
-  <button id="fullscreenBtn">Fullscreen</button>
-</div>
+<button id="restart">Restart</button>
 
-<script src="script.js?v=FINAL"></script>
+<script src="script.js?v=FINAL2"></script>
 </body>
 </html>
