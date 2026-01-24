@@ -1,48 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dragon Run</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Guntur Pulaos & Filter Coffees</title>
+
+  <!-- cache buster -->
+  <link rel="stylesheet" href="style.css?v=FINAL">
 </head>
 <body>
 
 <h1 class="logo">🍗 Guntur Pulaos & Filter Coffees ☕</h1>
-<p>Jump while your biryani is getting ready 😋</p>
+<p class="subtitle">Jump while your biryani is getting ready 😋</p>
 
-<p style="color:green; font-weight:bold; animation:pulse 1.5s infinite;">
-  🎁 Score 50 to get <b>10% Discount</b>!
-</p>
+<p class="offer">🎁 Score 50 to get <b>10% Discount</b></p>
 
-<div class="game">
-
-  <!-- moving background -->
+<div class="game" id="game">
   <div id="bg" class="bg"></div>
 
-  <!-- player -->
   <div id="dragon">🐔</div>
-
-  <!-- obstacle -->
   <div id="obstacle">🌶️</div>
 
-  <!-- moving ground -->
   <div id="ground" class="ground"></div>
-
 </div>
 
 <h2 id="score">Score: 0</h2>
 
-<p id="couponMsg" style="display:none; color:green; font-weight:bold;">
+<p id="couponMsg" class="coupon">
   🎉 You won a 10% DISCOUNT! Show this screen at the counter 😊
 </p>
 
-<p style="white-space:nowrap;">
-  Tap screen or press SPACE to jump
-</p>
+<p class="hint">Tap screen or press SPACE to jump</p>
 
-<button id="restart" onclick="restartGame()">Restart</button>
+<div class="controls">
+  <button id="restart">Restart</button>
+  <button id="fullscreenBtn">Fullscreen</button>
+</div>
 
-<script src="script.js"></script>
+<script src="script.js?v=FINAL"></script>
 </body>
 </html>
