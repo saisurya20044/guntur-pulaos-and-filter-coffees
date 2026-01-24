@@ -10,13 +10,25 @@
 
 <h1 class="logo">🍗 Guntur Pulaos & Filter Coffees ☕</h1>
 <p>Jump while your biryani is getting ready 😋</p>
-  <p style="color:green; font-weight:bold; animation:pulse 1.5s infinite;">
+
+<p style="color:green; font-weight:bold; animation:pulse 1.5s infinite;">
   🎁 Score 50 to get <b>10% Discount</b>!
-  </p>
+</p>
 
 <div class="game">
-  <div id="dragon"></div>
-  <div id="obstacle"></div>
+
+  <!-- moving background -->
+  <div id="bg" class="bg"></div>
+
+  <!-- player -->
+  <div id="dragon">🐔</div>
+
+  <!-- obstacle -->
+  <div id="obstacle">🌶️</div>
+
+  <!-- moving ground -->
+  <div id="ground" class="ground"></div>
+
 </div>
 
 <h2 id="score">Score: 0</h2>
@@ -34,6 +46,3 @@
 <script src="script.js"></script>
 </body>
 </html>
-
-
-
